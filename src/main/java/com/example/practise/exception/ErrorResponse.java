@@ -7,12 +7,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserException extends Exception {
-
+@AllArgsConstructor
+public class ErrorResponse {
 	private String message;
-
-	private static final long serialVersionUID = 1L;
-
 }
