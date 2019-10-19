@@ -5,8 +5,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,4 +55,15 @@ public class EmplController {
 		log.info("employee get method in clontroller class");
 		return new ResponseEntity<>(empService.getEmp(id),HttpStatus.OK);
 	}
+	
+	@PutMapping("/employee/{id}")
+	public ResponseEntity<EmpRDto> updateEmp(@NotNull @PathVariable Integer id, @NotNull @RequestParam String userCity, @NotNull @RequestParam Integer userPh ) throws UserException{
+		return new ResponseEntity<>(empService.updateEmp(id,userCity,userPh),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/employee/{id}")
+	public ResponseEntity<String> deleteEmp(@NotNull @PathVariable int id) throws UserException{
+		return new ResponseEntity<>(empService.deleteEmp(id),HttpStatus.OK);
+	}
+
 }

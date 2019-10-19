@@ -49,4 +49,31 @@ public class EmpServiceImpl implements EmpService{
 		return empRDto1;
 	}
 
+	@Override
+	public EmpRDto updateEmp(Integer id, String userCity, Integer userPh) throws UserException {
+		EmpRDto empRDto1 = new EmpRDto();
+		Optional<Employee> emp = empRepo.findById(id);
+		if(emp.isPresent()) {
+			emp.get().setUserCity(userCity);
+			emp.get().setUserPh(userPh);
+			Employee emp1  = empRepo.save(emp.get());
+			if(emp1.getUserName().equals(""))
+				throw new UserException("Plz try again");
+			BeanUtils.copyProperties(emp1, empRDto1);
+		}
+		else {
+			throw new UserException("invalid user");
+		}
+		return empRDto1;
+	}
+
+	@Override
+	public String deleteEmp(int id) throws UserException {
+		if(id==0) {
+			throw new UserException();
+		}
+	 empRepo.deleteById(id);
+		return "deleted successfully";
+	}
+
 }

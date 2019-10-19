@@ -13,4 +13,8 @@ public interface EmpService {
 
 	EmpRDto getEmp(int id) throws UserException;
 
+	EmpRDto updateEmp(Integer id, String userCity, Integer userPh) throws UserException;
+
+	String deleteEmp(int id) throws UserException;
+
 }
